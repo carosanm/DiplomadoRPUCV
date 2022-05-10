@@ -73,6 +73,8 @@ encuesta incluyen:
 
 -   FailedSmolt
 
+![Areas de manejo](MarineFjord.jpg)
+
 ## Descripción de las variables en estudio, factores a analizar y numero total de observaciones.
 
 Se analizaran mediante analisis de estadistica descriptiva 150 centros
@@ -81,7 +83,7 @@ se intentará encontrar un asociacion de riesgo, que permita sacar
 conclusiones logren evitar que se repita un episodio asi.
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set (echo = FALSE)
 install.packages("readxl")
 
 library(readxl)
@@ -101,26 +103,27 @@ library("shiny")
 ```
 
 ```{r, datos}
+(echo=FALSE)
 library(readr)
 D <- read_delim("MarineFjordland.txt")
 ```
 
 ```{r}
+(echo = FALSE)
 summary(D)
 ```
 
-```{r}
 ##Centros de Cultivo por area de Manejo (Barrio)
+```{r}
+(echo = FALSE)
 table(D$ManagementArea)
 ```
-
-```{r}
 ##Casos Totales 0=negativo 1= caso positivo
+```{r}
 table(D$Case)
 ```
-
-```{r}
 ##Densidad de siembra
+```{r}
 table(D$Density)
 ```
 ```{r}
@@ -164,3 +167,11 @@ exp(0.108)
 anova(Model2, test="LRT")
 ```
 ## CONCLUSIONES: 
+El análisis estadístico se realizó estableciendo la relación entre las variables observadas y
+la definición de caso (mortalidad superior al 5% por día).
+Se utilizó la prueba exacta de Fisher, que mostró que, según P value obtenido, la hipótesis nula (H0: No hay relación entre Densidad y Caso) fue rechazada. Por lo tanto si hay interacción de la densidad y el caso y se sugiere tener en cuenta la densidad de producción para evitar futuros brotes de mortalidad
+así como mantener una base de datos más exhaustiva para un mejor análisis de los casos.
+Lamentablemente falta información para llegar a mejores conclusiones, por lo que sugiere llevar una base de datos más exhaustiva donde se incorpore el analisis de más enfermedades presentes en el país.
+Así como las empresas productoras presentes en una zona de manejo, deben trabajar en conjunto con la
+autoridad sanitaria sobre las cuestiones sanitarias, medioambientales y de bienestar relevantes para cada zona de gestión.
+
