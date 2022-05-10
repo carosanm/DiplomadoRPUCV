@@ -73,7 +73,7 @@ encuesta incluyen:
 
 -   FailedSmolt
 
-![Areas de manejo](MarineFjord.jpg)
+![Figura 1: Areas de Manejo A, B, C, D y E de la zona MarineFjordland](MarineFjord.jpg)
 
 ## Descripción de las variables en estudio, factores a analizar y numero total de observaciones.
 
@@ -83,7 +83,7 @@ se intentará encontrar un asociacion de riesgo, que permita sacar
 conclusiones logren evitar que se repita un episodio asi.
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set (echo = FALSE)
+knitr::opts_chunk$set (echo = TRUE)
 install.packages("readxl")
 
 library(readxl)
@@ -92,7 +92,7 @@ library(readr)
 ```
 
 ```{r}
-(echo=FALSE)
+(echo=TRUE)
 library(datasets)
 library(ggplot2)
 library(readxl)
@@ -113,65 +113,78 @@ D <- read_delim("MarineFjordland.txt")
 summary(D)
 ```
 
-##Centros de Cultivo por area de Manejo (Barrio)
+#Centros de Cultivo por area de Manejo (Barrio)
 ```{r}
-(echo = FALSE)
+(echo = TRUE)
 table(D$ManagementArea)
 ```
-##Casos Totales 0=negativo 1= caso positivo
+#Casos Totales 0=negativo 1= caso positivo
 ```{r}
 table(D$Case)
 ```
-##Densidad de siembra
+#Densidad de siembra
 ```{r}
 table(D$Density)
 ```
+#Media, Rango y desviación estandar de Temperaturas en MarineFjorland
 ```{r}
 mean(D$MeanWaterTemperature)
 range(D$MeanWaterTemperature)
 sd(D$MeanWaterTemperature)
 ```
+#Gráfico de Temperatura por centro de cultivo
 ```{r}
 qplot(MeanWaterTemperature, data=D)
 ```
+
 ```{r}
 qplot(D$ManagementArea) + xlab("ManagementArea") + ylab("Count")
 ```
+
+#Gráfico Bloxpot asociando Densidad con Caso
 ```{r}
 boxplot(D$Density~D$Case, xlab= "Caso (Positivo=1/Negativo=0)", ylab="Densidad")
 ```
 
-
+#Prueba Fisher y Chi2 sobre H0:No hay relación entre Densidad y Caso
 ```{r}
 Table <- xtabs(~Density + Case, D)
 print(Table)
 fisher.test(Table)
 chisq.test(Table)
 ```
+
+
+#Prueba ANOVA Densidad y Caso
 ```{r}
 Model <- glm(Case ~ Density, family="binomial", data=D)
 summary(Model)
 exp(0.108)
 anova(Model, test="LRT")
 ```
+
+#Prueba Fisher y Chi2 sobre H0:No hay relación entre Temperatura y Caso
 ```{r}
 Table2 <- xtabs(~MeanWaterTemperature + Case, D)
 print(Table2)
 fisher.test(Table2)
 chisq.test(Table2)
 ```
+
+#Prueba de Anova Temperatura y Caso
 ```{r}
 Model2 <- glm(Case ~ MeanWaterTemperature, family="binomial", data=D)
 summary(Model2)
 exp(0.108)
 anova(Model2, test="LRT")
 ```
+
 ## CONCLUSIONES: 
 El análisis estadístico se realizó estableciendo la relación entre las variables observadas y
 la definición de caso (mortalidad superior al 5% por día).
 Se utilizó la prueba exacta de Fisher, que mostró que, según P value obtenido, la hipótesis nula (H0: No hay relación entre Densidad y Caso) fue rechazada. Por lo tanto si hay interacción de la densidad y el caso y se sugiere tener en cuenta la densidad de producción para evitar futuros brotes de mortalidad
-así como mantener una base de datos más exhaustiva para un mejor análisis de los casos.
-Lamentablemente falta información para llegar a mejores conclusiones, por lo que sugiere llevar una base de datos más exhaustiva donde se incorpore el analisis de más enfermedades presentes en el país.
+Así como mantener una base de datos más exhaustiva para un mejor análisis de los casos.
+Lamentablemente falta información para llegar a mejores conclusiones, por lo que sugiere llevar una base de datos donde se incorpore el analisis de más enfermedades presentes en el país.
 Así como las empresas productoras presentes en una zona de manejo, deben trabajar en conjunto con la
 autoridad sanitaria sobre las cuestiones sanitarias, medioambientales y de bienestar relevantes para cada zona de gestión.
 
