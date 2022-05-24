@@ -25,10 +25,10 @@ lo causó, ni aislarlo. Por lo tanto la definición de caso fue:
 mortalidad significativa de inicio súbito que comienza en un nivel bajo,
 pero aumenta rápidamente al 5% o más de la población en riesgo por día
 en los sitios afectados. El centro de cultivo se considera caso
-(1)cuando las mortalidades alcanzan el 5% por día y no caso (0) Se
+(1)cuando las mortalidades alcanzan el 5% por día y no caso (0). Se
 probaron varios enfoques terapéuticos, pero ninguno ayudo
-significativamente a evitar la progresión de la enfermedad. Se
-cosecharon los sitios afectados, en la medida que la talla se los
+significativamente a evitar la progresión de la enfermedad (aumento de mortalidad). Se
+cosecharon algunos de los sitios afectados, en la medida que la talla se los
 permitió, 5 sitios sacrificaron el stock, y en el resto, continuaron su
 etapa de engorda. En aquellos sitios que continuaron creciendo las
 pérdidas de peces fueron: Mín. 15 %, Máx. 65 %, y Media 45 %. Los datos
@@ -88,11 +88,6 @@ install.packages("readxl")
 
 library(readxl)
 library(readr)
-
-```
-
-```{r}
-(echo=TRUE)
 library(datasets)
 library(ggplot2)
 library(readxl)
@@ -100,32 +95,29 @@ library(stats)
 library(lme4)
 library(epiR)
 library("shiny")
+
 ```
 
+
+
 ```{r, datos}
-(echo=FALSE)
 library(readr)
 D <- read_delim("MarineFjordland.txt")
 ```
 
 ```{r}
-(echo = FALSE)
 summary(D)
 ```
 
 #Centros de Cultivo por area de Manejo (Barrio)
 ```{r}
-(echo = TRUE)
 table(D$ManagementArea)
 ```
 #Casos Totales 0=negativo 1= caso positivo
 ```{r}
-table(D$Case)
+table(D$Case, D$ManagementArea)
 ```
-#Densidad de siembra
-```{r}
-table(D$Density)
-```
+
 #Media, Rango y desviación estandar de Temperaturas en MarineFjorland
 ```{r}
 mean(D$MeanWaterTemperature)
@@ -134,11 +126,11 @@ sd(D$MeanWaterTemperature)
 ```
 #Gráfico de Temperatura por centro de cultivo
 ```{r}
-qplot(MeanWaterTemperature, data=D)
+ggplot(MeanWaterTemperature, data=D ) 
 ```
 
 ```{r}
-qplot(D$ManagementArea) + xlab("ManagementArea") + ylab("Count")
+ggplot2:(D$ManagementArea) + xlab("ManagementArea") + ylab("Count")
 ```
 
 #Gráfico Bloxpot asociando Densidad con Caso
@@ -146,38 +138,7 @@ qplot(D$ManagementArea) + xlab("ManagementArea") + ylab("Count")
 boxplot(D$Density~D$Case, xlab= "Caso (Positivo=1/Negativo=0)", ylab="Densidad")
 ```
 
-#Prueba Fisher y Chi2 sobre H0:No hay relación entre Densidad y Caso
-```{r}
-Table <- xtabs(~Density + Case, D)
-print(Table)
-fisher.test(Table)
-chisq.test(Table)
-```
 
-
-#Prueba ANOVA Densidad y Caso
-```{r}
-Model <- glm(Case ~ Density, family="binomial", data=D)
-summary(Model)
-exp(0.108)
-anova(Model, test="LRT")
-```
-
-#Prueba Fisher y Chi2 sobre H0:No hay relación entre Temperatura y Caso
-```{r}
-Table2 <- xtabs(~MeanWaterTemperature + Case, D)
-print(Table2)
-fisher.test(Table2)
-chisq.test(Table2)
-```
-
-#Prueba de Anova Temperatura y Caso
-```{r}
-Model2 <- glm(Case ~ MeanWaterTemperature, family="binomial", data=D)
-summary(Model2)
-exp(0.108)
-anova(Model2, test="LRT")
-```
 
 ## CONCLUSIONES: 
 El análisis estadístico se realizó estableciendo la relación entre las variables observadas y
