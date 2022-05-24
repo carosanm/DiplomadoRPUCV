@@ -141,11 +141,5 @@ boxplot(D$Density~D$Case, xlab= "Caso (Positivo=1/Negativo=0)", ylab="Densidad")
 
 
 ## CONCLUSIONES: 
-El análisis estadístico se realizó estableciendo la relación entre las variables observadas y
-la definición de caso (mortalidad superior al 5% por día).
-Se utilizó la prueba exacta de Fisher, que mostró que, según P value obtenido, la hipótesis nula (H0: No hay relación entre Densidad y Caso) fue rechazada. Por lo tanto si hay interacción de la densidad y el caso y se sugiere tener en cuenta la densidad de producción para evitar futuros brotes de mortalidad
-Así como mantener una base de datos más exhaustiva para un mejor análisis de los casos.
-Lamentablemente falta información para llegar a mejores conclusiones, por lo que sugiere llevar una base de datos donde se incorpore el analisis de más enfermedades presentes en el país.
-Así como las empresas productoras presentes en una zona de manejo, deben trabajar en conjunto con la
-autoridad sanitaria sobre las cuestiones sanitarias, medioambientales y de bienestar relevantes para cada zona de gestión.
+De acuerdo al analisis exploratorio de datos realizado, podemos 
 
