@@ -37,74 +37,69 @@ principios de junio de 2021, de 150 granjas. 87 de estos fueron
 identificados como casos en ese momento. Los datos disponibles de la
 encuesta incluyen:
 
--   SiteName
+-   SiteName (Nombre centro)
 
--   ManagementArea
+-   ManagementArea (Area de Manejo)
 
--   Case
+-   Case (Caso 1/0)
 
--   DateOfCase
+-   MeanWaterTemperature (Temperatura promedio)
 
--   MeanWaterTemperature
+-   Density (Densidad)
 
--   CageShape
+-   Company (Compañía)
 
--   CageDiameter
+-   Vaccine (Tipo de vacuna)
 
--   CageDepth
+-   SeaLice (Presencia de Sealice)
 
--   CageVolume
+-   GillDisease (Enfermedad branquial )
 
--   Density
-
--   InitialStocking
-
--   Company
-
--   FeedSupplier
-
--   SmoltSupplier
-
--   Vaccine
-
--   SeaLice
-
--   GillDisease
-
--   FailedSmolt
+-   FailedSmolt (Calidad smolt)
 
 ![Figura 1: Areas de Manejo A, B, C, D y E de la zona MarineFjordland](MarineFjord.jpg)
 
 ## Descripción de las variables en estudio, factores a analizar y numero total de observaciones.
 
-Se analizaran mediante analisis de estadistica descriptiva 150 centros
-de cultivo, con su correspondientes informacion (2550 observaciones) y
-se intentará encontrar un asociacion de riesgo, que permita sacar
-conclusiones logren evitar que se repita un episodio asi.
+Se realizara un analisis exploratorio a la base de datos de   150 centros
+de cultivo, con su correspondientes informacion 
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set (echo = TRUE)
 install.packages("readxl")
-
-library(readxl)
-library(readr)
-library(datasets)
 library(ggplot2)
-library(readxl)
-library(stats)
+library(dplyr)
+library(multcomp)
+library(psych)
+library(car)
+library(nlme)
 library(lme4)
+library(readr)
+library(lmtest)
+library(sjPlot)
+library(readxl)
+library(datasets)
+library(stats)
 library(epiR)
 library("shiny")
 
 ```
 
-
-
 ```{r, datos}
-library(readr)
 D <- read_delim("MarineFjordland.txt")
 ```
+##Preguntas Iniciales
+¿Cuántas y qué tipo de variables se dispone para el análisis?
+8 variables: Area de manejo (cualitativa nominal), Compañia (cualitativa nominal), Tipo de vacuna (cualitativa nominal), Temperatura promedio (cuantitativo continuo), Densidad (cuantitativo continuo) , Presencia de Sealice (variable aleatoria discreta con distribucion bernoulli), enfermedad branquial (variable aleatoria discreta con distribucion bernoulli), calidad de smolt (variable aleatoria discreta con distribucion bernoulli).
+¿Cuales son los tratamientos? Caso 1 (positivo, es decir mortalidad mayor al 5% diario), Caso 0 (negativo, es decir no se mortalidad mayor al 5% diario), variable aleatoria discreta con distribucion bernoulli
+¿La base de datos está completa?, ¿tiene errores?
+¿Es posible responder las causas de mortalidad con los datos disponibles?
+¿la cantidad de datos y variables permite hacer un análisis estadistico?
+```{r}
+table(D$Case,D$SiteName )
+```
 
+##Resumen y Visualización
 ```{r}
 summary(D)
 ```
@@ -113,24 +108,22 @@ summary(D)
 ```{r}
 table(D$ManagementArea)
 ```
+
+
 #Casos Totales 0=negativo 1= caso positivo
 ```{r}
 table(D$Case, D$ManagementArea)
 ```
 
-#Media, Rango y desviación estandar de Temperaturas en MarineFjorland
+#Histograma Temperatura promedio 
 ```{r}
-mean(D$MeanWaterTemperature)
-range(D$MeanWaterTemperature)
-sd(D$MeanWaterTemperature)
+ggplot(D, aes(x=D$MeanWaterTemperature))+
+  geom_histogram(color="green", fill="lightblue", bins = 10)+theme_classic()+theme(text = element_text(size=20,face="bold",colour="black"))+xlab("Temperatura promedio c°")
 ```
-#Gráfico de Temperatura por centro de cultivo
+#Histograma Densidad (distribucion binomial con desplazamiento a la derecha)
 ```{r}
-ggplot(MeanWaterTemperature, data=D ) 
-```
-
-```{r}
-ggplot2:(D$ManagementArea) + xlab("ManagementArea") + ylab("Count")
+ggplot(D, aes(x=D$Density))+
+  geom_histogram(color="green", fill="lightblue", bins = 10)+theme_classic()+theme(text = element_text(size=20,face="bold",colour="black"))+xlab("Densidad")
 ```
 
 #Gráfico Bloxpot asociando Densidad con Caso
@@ -140,6 +133,6 @@ boxplot(D$Density~D$Case, xlab= "Caso (Positivo=1/Negativo=0)", ylab="Densidad")
 
 
 
-## CONCLUSIONES: 
-De acuerdo al analisis exploratorio de datos realizado, podemos 
+## Hipotesis nula 
+¿La mortalidad observada en los casos positivos está explicada por tipo de vacuna, zona de manejo, temperatura promedio del agua, densidad de cultivo, compañia productora,enfermedad de branquias, presencia de caligus, calidad de smolt?  
 
