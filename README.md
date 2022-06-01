@@ -1,5 +1,4 @@
 # DiplomadoRPUCV
-Mas reciente
 En 2021, en Marinefjordland, un zona de fiordos con 5 areas de manejo
 (simil a un ´barrio´ en Chile) donde se cultiva salmón del atlantico, se
 vieron afectados 87 de 150 centros de cultivo. El problema fue una
