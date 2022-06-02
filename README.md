@@ -21,3 +21,4 @@ fueron recopilados por la autoridad sanitaria nacional competente a
 principios de junio de 2021, de 150 granjas. 87 de estos fueron
 identificados como casos en ese momento. Los datos disponibles de la
 encuesta incluyen:
+(Faltan los comentarios finales)
