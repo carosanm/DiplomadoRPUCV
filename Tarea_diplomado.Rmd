@@ -3,8 +3,8 @@ title: "Tarea diplomado: Analisis de caso: Mortalidad en MarineFjordland en 2021
 author: "Carolina San Martin"
 date: "`r Sys.Date()`"
 output:
-  html_document: default
   pdf_document: default
+  html_document: default
 editor_options: 
   markdown: 
     wrap: 72
@@ -88,7 +88,7 @@ library("shiny")
 ```{r, datos}
 D <- read_delim("MarineFjordland.txt")
 ```
-## Preguntas Iniciales
+# Preguntas Iniciales
 ¿Cuántas y qué tipo de variables se dispone para el análisis?
 8 variables: Area de manejo (cualitativa nominal), Compañia (cualitativa nominal), Tipo de vacuna (cualitativa nominal), Temperatura promedio (cuantitativo continuo), Densidad (cuantitativo continuo) , Presencia de Sealice (variable aleatoria discreta con distribucion bernoulli), enfermedad branquial (variable aleatoria discreta con distribucion bernoulli), calidad de smolt (variable aleatoria discreta con distribucion bernoulli).
 ¿Cuales son los tratamientos? Caso 1 (positivo, es decir mortalidad mayor al 5% diario), Caso 0 (negativo, es decir no se mortalidad mayor al 5% diario), variable aleatoria discreta con distribucion bernoulli
@@ -100,7 +100,7 @@ D <- read_delim("MarineFjordland.txt")
 table(D$Case,D$SiteName )
 ```
 
-## Resumen y Visualización
+# Resumen y Visualización
 ```{r}
 summary(D)
 ```
@@ -154,19 +154,19 @@ ggplot(D, aes(x=D$Density))+
 boxplot(D$Density~D$Case, xlab= "Caso (Positivo=1/Negativo=0)", ylab="Densidad")
 ```
 
-## QQplot para ver la normalidad de los datos
+# QQplot para ver la normalidad de los datos
 ```{r}
 qqnorm(D$Density)
 qqline(D$Density)
 ```
 
-## De acuerdo a lo que vemos en el qqplot, los datos de Densidad no tienen una distribución normal y tienen una asimetría hacia la izquierda.
+# De acuerdo a lo que vemos en el qqplot, los datos de Densidad no tienen una distribución normal y tienen una asimetría hacia la izquierda.
 
 
-## Preguntas Adicionales: Hipotesis nula 
+# Preguntas Adicionales: Hipotesis nula 
 ¿La mortalidad observada en los casos positivos está explicada por tipo de vacuna, zona de manejo, temperatura promedio del agua, densidad de cultivo, compañia productora,enfermedad de branquias, presencia de caligus, calidad de smolt?  
 
 
-## Comentario Final
+# Comentario Final
 La base de datos está limpia, completa, existen variables cualitativas y cuantitativas.
 La variables cuantitativas no tienen una distribución normal por ende se requiere pruebas no parametricas para un adecuado análisis estadistico.
