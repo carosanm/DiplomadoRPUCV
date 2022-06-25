@@ -10,11 +10,16 @@ vieron afectados 87 de 150 centros de cultivo. El problema fue una
 mortalidad significativa de inicio súbito que comienza en un nivel bajo,
 pero aumenta rápidamente al 5% o más de la población en riesgo por día
 en los sitios afectados. El centro de cultivo se considera caso
+<<<<<<< HEAD
 (1)cuando las mortalidades alcanzan el 5% por día y no caso (0) Se
 (1)cuando las mortalidades alcanzan el 5% por día y no caso (0). Se
 probaron varios enfoques terapéuticos, pero ninguno ayudo
 significativamente a evitar la progresión de la enfermedad. Se
 cosecharon los sitios afectados, en la medida que la talla se los
+=======
+(1)cuando las mortalidades alcanzan el 5% por día y no caso (0). Se
+probaron varios enfoques terapéuticos, pero ninguno ayudo
+>>>>>>> 988324b1a12fab420f45842f4d06a02856357418
 significativamente a evitar la progresión de la enfermedad (aumento de mortalidad). Se
 cosecharon algunos de los sitios afectados, en la medida que la talla se los
 permitió, 5 sitios sacrificaron el stock, y en el resto, continuaron su
@@ -24,7 +29,10 @@ fueron recopilados por la autoridad sanitaria nacional competente a
 principios de junio de 2021, de 150 granjas. 87 de estos fueron
 identificados como casos en ese momento. Los datos disponibles de la
 encuesta incluyen:
+<<<<<<< HEAD
 (Faltan los comentarios finales)
+=======
+>>>>>>> 988324b1a12fab420f45842f4d06a02856357418
 
 -   SiteName (Nombre centro)
 
@@ -70,6 +78,10 @@ library(datasets)
 library(stats)
 library(epiR)
 library("shiny")
+<<<<<<< HEAD
+=======
+
+>>>>>>> 988324b1a12fab420f45842f4d06a02856357418
 ```
 
 ```{r, datos}
