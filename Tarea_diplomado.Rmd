@@ -3,7 +3,7 @@ title: "Tarea diplomado: Analisis de caso: Mortalidad en MarineFjordland en 2021
 author: "Carolina San Martin"
 date: "`r Sys.Date()`"
 output:
-  html_document: default
+    html_document: default
   pdf_document: default
 editor_options: 
   markdown: 
@@ -119,7 +119,7 @@ table(D$Case, D$ManagementArea)
 # Histograma Temperatura promedio 
 ```{r}
 ggplot(D, aes(x=D$MeanWaterTemperature))+
-  geom_histogram(color="green", fill="lightblue", bins = 10)+theme_classic()+theme(text = element_text(size=20,face="bold",colour="black"))+xlab("Temperatura promedio c°")
+  geom_histogram(color="black", fill="blue", bins = 10)+theme_classic()+theme(text = element_text(size=20,face="bold",colour="black"))+xlab("Temperatura promedio c°")
 ```
 
 # Gráfico Bloxpot asociando T° promeddio con Caso
