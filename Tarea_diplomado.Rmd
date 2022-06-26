@@ -96,13 +96,11 @@ D <- read_delim("MarineFjordland.txt")
 ¿Es posible responder las causas de mortalidad con los datos disponibles?
 ¿la cantidad de datos y variables permite hacer un análisis estadistico?
 
-```{r}
-table(D$Case,D$SiteName )
-```
+
 
 # Resumen y Visualización
 ```{r}
-summarise(D)
+summarise(N=n(), mean(D), Variance= var(Mortalidad))
 ```
 
 # Centros de Cultivo por area de Manejo (Barrio)
@@ -146,7 +144,7 @@ qqline (D$MeanWaterTemperature)
 # Histograma Densidad (distribucion binomial con desplazamiento a la derecha)
 ```{r}
 ggplot(D, aes(x=D$Density))+
-  geom_histogram(color="green", fill="lightblue", bins = 10)+theme_classic()+theme(text = element_text(size=20,face="bold",colour="black"))+xlab("Densidad")
+  geom_histogram(color="black", fill="grey", bins = 10)+theme_classic()+theme(text = element_text(size=20,face="bold",colour="black"))+xlab("Densidad")
 ```
 
 # Gráfico Bloxpot asociando Densidad con Caso
