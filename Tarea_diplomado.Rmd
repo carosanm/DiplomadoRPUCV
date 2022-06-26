@@ -3,8 +3,8 @@ title: "Tarea diplomado: Analisis de caso: Mortalidad en MarineFjordland en 2021
 author: "Carolina San Martin"
 date: "`r Sys.Date()`"
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 editor_options: 
   markdown: 
     wrap: 72
