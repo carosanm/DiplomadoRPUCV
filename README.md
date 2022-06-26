@@ -4,22 +4,18 @@
 ## Descripción del problema a resolver
 
 En 2021, en Marinefjordland, un zona de fiordos con 5 areas de manejo
-(simil a un ´barrio´ en Chile) donde se cultiva salmón del atlantico, se
+(simil a un ´barrio´ en Chile) donde se cultiva salmón del atlántico, se
 vieron afectados 87 de 150 centros de cultivo. El problema fue una
-@@ -10,15 +14,135 @@ lo causó, ni aislarlo. Por lo tanto la definición de caso fue:
+mortalidad significativa de inicio repentino, comenzando en un nivel
+bajo, pero aumentando rápidamente hasta el 5% de la población en riesgo
+por día en los sitios afectados. Los datos fueron recopilaron en 2021,
+sin resultados concluyentes, no fue posible determinar el patogeno que
+lo causó, ni aislarlo. Por lo tanto la definición de caso fue:
 mortalidad significativa de inicio súbito que comienza en un nivel bajo,
 pero aumenta rápidamente al 5% o más de la población en riesgo por día
-en los sitios afectados. El centro de cultivo se considera caso
-<<<<<<< HEAD
-(1)cuando las mortalidades alcanzan el 5% por día y no caso (0) Se
-(1)cuando las mortalidades alcanzan el 5% por día y no caso (0). Se
-probaron varios enfoques terapéuticos, pero ninguno ayudo
-significativamente a evitar la progresión de la enfermedad. Se
-cosecharon los sitios afectados, en la medida que la talla se los
-=======
-(1)cuando las mortalidades alcanzan el 5% por día y no caso (0). Se
-probaron varios enfoques terapéuticos, pero ninguno ayudo
->>>>>>> 988324b1a12fab420f45842f4d06a02856357418
+en los sitios afectados.
+El centro de cultivo se considera caso (1) cuando las mortalidades alcanzan el 5% por día y no caso (0). 
+Se probaron varios enfoques terapéuticos, pero ninguno ayudo
 significativamente a evitar la progresión de la enfermedad (aumento de mortalidad). Se
 cosecharon algunos de los sitios afectados, en la medida que la talla se los
 permitió, 5 sitios sacrificaron el stock, y en el resto, continuaron su
@@ -29,10 +25,6 @@ fueron recopilados por la autoridad sanitaria nacional competente a
 principios de junio de 2021, de 150 granjas. 87 de estos fueron
 identificados como casos en ese momento. Los datos disponibles de la
 encuesta incluyen:
-<<<<<<< HEAD
-(Faltan los comentarios finales)
-=======
->>>>>>> 988324b1a12fab420f45842f4d06a02856357418
 
 -   SiteName (Nombre centro)
 
@@ -55,6 +47,7 @@ encuesta incluyen:
 -   FailedSmolt (Calidad smolt)
 
 ![Figura 1: Areas de Manejo A, B, C, D y E de la zona MarineFjordland](MarineFjord.jpg)
+
 ## Descripción de las variables en estudio, factores a analizar y numero total de observaciones.
 
 Se realizara un analisis exploratorio a la base de datos de   150 centros
@@ -78,10 +71,7 @@ library(datasets)
 library(stats)
 library(epiR)
 library("shiny")
-<<<<<<< HEAD
-=======
 
->>>>>>> 988324b1a12fab420f45842f4d06a02856357418
 ```
 
 ```{r, datos}
