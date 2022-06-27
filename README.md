@@ -14,8 +14,8 @@ lo causó, ni aislarlo. Por lo tanto la definición de caso fue:
 mortalidad significativa de inicio súbito que comienza en un nivel bajo,
 pero aumenta rápidamente al 5% o más de la población en riesgo por día
 en los sitios afectados.
-El centro de cultivo se considera caso (1) cuando las mortalidades alcanzan el 5% por día y no caso (0). 
-Se probaron varios enfoques terapéuticos, pero ninguno ayudo
+El centro de cultivo se considera caso (1) cuando las mortalidades alcanzan el 5% por día y no caso (0) cuando las mortalidades diaras son menores a 5%. 
+Se probaron varios enfoques terapéuticos, pero ninguno ayudó
 significativamente a evitar la progresión de la enfermedad (aumento de mortalidad). Se
 cosecharon algunos de los sitios afectados, en la medida que la talla se los
 permitió, 5 sitios sacrificaron el stock, y en el resto, continuaron su
@@ -50,8 +50,28 @@ encuesta incluyen:
 
 ## Descripción de las variables en estudio, factores a analizar y numero total de observaciones.
 
-Se realizara un analisis exploratorio a la base de datos de   150 centros
-de cultivo, con su correspondientes informacion 
+Se realizará un análisis exploratorio a la base de datos de 150 centros
+de cultivo, con su correspondiente información.
+
+# Preguntas Iniciales
+#¿Cuántas y qué tipo de variables se dispone para el análisis?
+8 variables: 
+Area de manejo (cualitativa nominal),
+Compañia (cualitativa nominal), 
+Tipo de vacuna (cualitativa nominal),
+Temperatura promedio (cuantitativo continuo),
+Densidad (cuantitativo continuo),
+Presencia de Sealice (variable aleatoria discreta con distribucion bernoulli),
+Enfermedad branquial (variable aleatoria discreta con distribucion bernoulli),
+calidad de smolt (variable aleatoria discreta con distribucion bernoulli).
+
+#¿Cuales son los tratamientos? 
+Caso 1 (positivo, es decir mortalidad mayor al 5% diario),
+Caso 0 (negativo, es decir no se observa mortalidad mayor al 5% diario), variable aleatoria discreta con distribucion bernoulli
+
+¿La base de datos está completa?, ¿tiene errores?, ¿está balanceada? trataremos de responder con el análisis exploratorio de los datos
+¿Es posible responder las causas de mortalidad con los datos disponibles?
+¿la cantidad de datos y variables permite hacer un análisis estadistico?
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set (echo = TRUE)
@@ -71,28 +91,14 @@ library(datasets)
 library(stats)
 library(epiR)
 library("shiny")
-
 ```
-
 ```{r, datos}
 D <- read_delim("MarineFjordland.txt")
-```
-# Preguntas Iniciales
-¿Cuántas y qué tipo de variables se dispone para el análisis?
-8 variables: Area de manejo (cualitativa nominal), Compañia (cualitativa nominal), Tipo de vacuna (cualitativa nominal), Temperatura promedio (cuantitativo continuo), Densidad (cuantitativo continuo) , Presencia de Sealice (variable aleatoria discreta con distribucion bernoulli), enfermedad branquial (variable aleatoria discreta con distribucion bernoulli), calidad de smolt (variable aleatoria discreta con distribucion bernoulli).
-¿Cuales son los tratamientos? Caso 1 (positivo, es decir mortalidad mayor al 5% diario), Caso 0 (negativo, es decir no se mortalidad mayor al 5% diario), variable aleatoria discreta con distribucion bernoulli
-¿La base de datos está completa?, ¿tiene errores?
-¿Es posible responder las causas de mortalidad con los datos disponibles?
-¿la cantidad de datos y variables permite hacer un análisis estadistico?
-
-```{r}
-table(D$Case,D$SiteName )
 ```
 # Resumen y Visualización
 ```{r}
 summarise(D)
 ```
-
 # Centros de Cultivo por area de Manejo (Barrio)
 ```{r}
 table(D$ManagementArea)
