@@ -82,6 +82,7 @@ library(datasets)
 library(stats)
 library(epiR)
 library("shiny")
+library(tidyverse)
 
 ```
 
@@ -160,11 +161,48 @@ qqline(D$Density)
 
 # De acuerdo a lo que vemos en el qqplot, los datos de Densidad no tienen una distribución normal y tienen una asimetría hacia la izquierda.
 
+# Prueba de Kolmogorov-Smirnov
+```{r}
+ks.test(D$Density, "pnorm")
+ks.test(D$Case, "pnorm")
+
+```
+
+
+
 
 # Preguntas Adicionales: Hipotesis nula 
 ¿La mortalidad observada en los casos positivos está explicada por tipo de vacuna, zona de manejo, temperatura promedio del agua, densidad de cultivo, compañia productora,enfermedad de branquias, presencia de caligus, calidad de smolt?  
 
 
-# Comentario Final
+# Comentario Final al analisis exploratorio de datos
 La base de datos está limpia, completa, existen variables cualitativas y cuantitativas.
 La variables cuantitativas no tienen una distribución normal por ende se requiere pruebas no parametricas para un adecuado análisis estadistico.
+
+# Propuesta de Hipotesis
+Hipotesis 0: La densidad está asociada al caso (1)
+Hipotesis 1: La densidad no esta asociada al caso(1)
+
+Para evaluavar la correlación entre dos variables cuantitativas y no parametricos se utilizará la coeficiente rho de Spearman.
+
+```{r}
+cor(x=D$Density, y=D$Case, method='spearman')
+```
+Escala Spearman:
+
+Correlación negativa perfecta…………………………..   -1
+
+Correlación negativa fuerte moderada débil……………   -0,5
+
+Ninguna correlación…………………………………….      0
+
+Correlación positiva moderada Fuerte………………….    +0,5
+
+Correlación positiva perfecta…………………………...   + 1 
+
+La interpretación del coeficiente rho de Spearman concuerda en valores próximos a 1; indican una correlación fuerte y positiva. Valores próximos a –1 indican una correlación fuerte y negativa. Valores próximos a cero indican que no hay correlación lineal. Puede que exista otro tipo de correlación, pero no lineal. 
+
+# Evaluación de supuestos
+
+## Se acepta la hipotesis nula, la correlacion es positiva moderada, y muy posiblemente no lineal.
+
