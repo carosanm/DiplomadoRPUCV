@@ -83,6 +83,7 @@ library(stats)
 library(epiR)
 library("shiny")
 library(tidyverse)
+library(knitr)
 
 ```
 
@@ -101,8 +102,10 @@ D <- read_delim("MarineFjordland.txt")
 
 # Resumen y Visualización
 ```{r}
-summarise(N=n(), mean(D), Variance= var(Mortalidad))
+resumen<-D%>%group_by(Case)%>%summarise(N=n(), mean(Density), Variance= var(Density))
+kable(resumen)
 ```
+
 
 # Centros de Cultivo por area de Manejo (Barrio)
 ```{r}
@@ -180,13 +183,13 @@ La base de datos está limpia, completa, existen variables cualitativas y cuanti
 La variables cuantitativas no tienen una distribución normal por ende se requiere pruebas no parametricas para un adecuado análisis estadistico.
 
 # Propuesta de Hipotesis
-Hipotesis 0: La densidad está asociada al caso (1)
-Hipotesis 1: La densidad no esta asociada al caso(1)
+Hipotesis 0: La densidad no esta asociada al caso(1)
+Hipotesis 1: La densidad está asociada al caso (1)
 
 Para evaluavar la correlación entre dos variables cuantitativas y no parametricos se utilizará la coeficiente rho de Spearman.
 
 ```{r}
-cor(x=D$Density, y=D$Case, method='spearman')
+cor.test(x=D$Density, y=D$Case, method='spearman')
 ```
 Escala Spearman:
 
@@ -201,8 +204,41 @@ Correlación positiva moderada Fuerte………………….    +0,5
 Correlación positiva perfecta…………………………...   + 1 
 
 La interpretación del coeficiente rho de Spearman concuerda en valores próximos a 1; indican una correlación fuerte y positiva. Valores próximos a –1 indican una correlación fuerte y negativa. Valores próximos a cero indican que no hay correlación lineal. Puede que exista otro tipo de correlación, pero no lineal. 
+Y el P value es menor a 0,5 por lo tanto se acepta la hipotesis alternativa es decir hay correlación entre caso (1) y densidad.
 
 # Evaluación de supuestos
+Independencia y analisis de residuales
+```{r}
+plot(Case$residuals, pch=20, col = "blue",
+cex.lab=1.25, cex.axis=1.25)
+```
+Se tiene en consideración que los supuestos se cumplen para los datos disponible porque son
+independientes y que no presentan error ya que en el análisis exploratorio previo se observó
+que existe igual numero de observaciones de densidad como números de jaulas que reportan
+mortalidad, estos datos, por ser colectados de un zona de fiordos con 5 areas de manejo (simil
+a un ´barrio´ en Chile) donde se cultiva salmón del atlantico, donde se vieron afectados por
+eventos de mortalidad 87 de 150 centros de cultivo el año 202. Los datos de 150 centros
+fueron colectados mediante la misma metodología y de forma aleatoria proporcionando datos
+de densidad de cultivo (Kg/m3) acumulados en el tiempo, así como mortalidad caso 1 y 0,
+entendiendo según definición de Caso 1: son todas las jaulas que presentaron mortalidad
+igual o mayor a 5% día y Caso 0: todas aquellas jaulas cuya mortalidad fue menor a 5% día.
+Supuestos de tamaño de muestra
+En relación al tamaño de la muestra, se puede mencionar que corresponden al 100% de los
+datos observados.
 
-## Se acepta la hipotesis nula, la correlacion es positiva moderada, y muy posiblemente no lineal.
+#Normalidad
+En relación con la distribución de los datos de densidad, los cuales corresponden a variables
+cuantitivas continuas, estos no se ajustan a una distribución normal de acuerdo con el
+estadístico Prueba de Shapiro-wilks cuyo valor de p es de &gt;0,0001.
+En relación con la mortalidad, estos datos corresponden a variables cuantitativa discreta y
+cuya distribución de tipo binomial a la derecha, no se ajusta a la mortalidad según Shapiro-
+wilks cuyo valor de p es de >0,0001%. Si bien los datos cuya distribución no es normal, se
+estaría violando el supuesto, sin embargo, de acuerdo con la clase del Dr. Gallardo, se podría
+aceptados datos casi normales, particularmente si en n es &gt;a 30. La distribución a la derecha
+en el histograma puede estar explicado por el tiempo de cultivo de los centros en donde la
+densidad aumenta en la medida que aumenta el tiempo de cultivo o crecimiento de los peces,
+en este caso la media es de 12,34 kg/m3.
+
+## Conclusiones
+Se acepta la hipotesis alternativa, la correlacion es positiva moderada, y muy posiblemente no lineal.
 
