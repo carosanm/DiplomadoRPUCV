@@ -13,7 +13,6 @@ output:
   slidy_presentation: default
   ioslides_presentation: default
 subtitle: Diplomado en Análisis de datos con R para la Acuicultura.
-institute: Pontificia Universidad Católica de Valparaíso
 
 ---
 
@@ -26,16 +25,28 @@ library(dplyr)
 library(readxl)
 ```
 
-
-## Titulo: "Analisis de caso, mortalidad en MarineFjordland en 2021"
+## Introducción
+- En 2021, en la zona MarineFjordLand se cultivaban salmon del atlatico en 150 centros distribuidos en 5 areas de manejo (A, B, C, D y E).
+- De manera repentina comienzan a detectarse mortalidades mayor al 5% diario en distintos centros del area.
+- Se intento descubrir el problema o patogeno asociado a la mortalidad sin exito.
+- La autoridad sanitaria levantó una encuesta a todos los centros del area para determinar causalidad. A partir de esta información se obtiene la base de datos con la que trabajaremos para este proyecto.
 
 ## Introducción
 ![Figura 1: Areas de Manejo A, B, C, D y E de la zona MarineFjordland](MarineFjord.jpg)
-- 
-
 
 
 ## Análisis exploratorio de datos
+I.- Preguntas Iniciales.
+¿Cuántas y qué tipo de variables se dispone para el análisis?
+8 variables:
+1.- Area de manejo (cualitativa nominal), 
+2.- Compañia (cualitativa nominal),
+3.- Tipo de vacuna (cualitativa nominal),
+4.- Temperatura promedio (cuantitativo continuo), 
+5.- Densidad (cuantitativo continuo),
+6.- Presencia de Sealice (variable aleatoria discreta con distribucion bernoulli),
+7.- Enfermedad branquial (variable aleatoria discreta con distribucion bernoulli),
+8.- Calidad de smolt (variable aleatoria discreta con distribucion bernoulli).
 
 
 ## Modelo a utilizar

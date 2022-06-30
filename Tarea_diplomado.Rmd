@@ -17,24 +17,14 @@ El problema fue una
 mortalidad significativa de inicio repentino, comenzando en un nivel
 bajo, pero aumentando rápidamente hasta el 5% de la población en riesgo
 por día en los sitios afectados. Los datos fueron recopilaron en 2021,
-sin resultados concluyentes, no fue posible determinar el patogeno que
-lo causó, ni aislarlo.
+sin resultados concluyentes, no fue posible determinar el patogeno que lo causó, ni aislarlo.
 Por lo tanto la definición de caso fue:
 mortalidad significativa de inicio súbito que comienza en un nivel bajo,
-pero aumenta rápidamente al 5% o más de la población en riesgo por día
-en los sitios afectados. El centro de cultivo se considera caso
-(1)cuando las mortalidades alcanzan el 5% por día y no caso (0) cuando las mortalidades no alcanzan el 5% diario.
-Se
-probaron varios enfoques terapéuticos, pero ninguno ayudo
-significativamente a evitar la progresión de la enfermedad (aumento de mortalidad). Se
-cosecharon algunos de los sitios afectados, en la medida que la talla se los
-permitió, 5 sitios sacrificaron el stock, y en el resto, continuaron su
-etapa de engorda. En aquellos sitios que continuaron creciendo las
-pérdidas de peces fueron: Mín. 15 %, Máx. 65 %, y Media 45 %. Los datos
-fueron recopilados por la autoridad sanitaria nacional competente a
-principios de junio de 2021, de 150 granjas. 87 de estos fueron
-identificados como casos en ese momento. Los datos disponibles de la
-encuesta incluyen:
+pero aumenta rápidamente al 5% o más de la población en riesgo por día en los sitios afectados. El centro de cultivo se considera caso (1) cuando las mortalidades alcanzan el 5% por día y no caso (0) cuando las mortalidades no alcanzan el 5% diario.
+Se probaron varios enfoques terapéuticos, pero ninguno ayudo
+significativamente a evitar la progresión de la enfermedad (aumento de mortalidad). Se cosecharon algunos de los sitios afectados, en la medida que la talla se los
+permitió, 5 sitios sacrificaron el stock, y en el resto, continuaron su etapa de engorda. En aquellos sitios que continuaron su etapa de engorda las pérdidas de peces fueron: Mín. 15 %, Máx. 65 %, y Media 45 %. Los datos
+fueron recopilados por la autoridad sanitaria nacional competente a principios de junio de 2021, de 150 granjas. 87 de estos fueron identificados como casos en ese momento. Los datos disponibles de la encuesta incluyen:
 
 -   SiteName (Nombre centro)
 
@@ -130,6 +120,7 @@ table(D$ManagementArea)
 ```{r}
 table(D$Case, D$ManagementArea)
 ```
+Dentro de todas las variables, para este trabajo se decidió mostrar el analisis de sólo 2 variables Temperatura y Densidad, para luego ver la correlación de la variable Densidad y Caso (1), decir relación entre densidad y la presencia de mortalidad diaria mayor al 5%.
 
 # Histograma Temperatura promedio 
 ```{r}
@@ -156,7 +147,12 @@ D$MeanWaterTemperature <- rgamma (150, 1)
 qqnorm (D$MeanWaterTemperature)
 qqline (D$MeanWaterTemperature)
 ```
+# Prueba de Kolmogorov-Smirnov
+```{r}
+ks.test(D$MeanWaterTemperature, "pnorm")
+ks.test(D$Case, "pnorm")
 
+```
 
 # Histograma Densidad (distribucion binomial con desplazamiento a la derecha)
 ```{r}
