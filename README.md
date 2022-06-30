@@ -52,8 +52,8 @@ encuesta incluyen:
 
 ## Descripción de las variables en estudio, factores a analizar y numero total de observaciones.
 
-Se realizará un análisis exploratorio a la base de datos de 150 centros
-de cultivo, con su correspondiente información.
+Se realiza un análisis exploratorio a la base de datos de 150 centros
+de cultivo, con su correspondiente información. Se analizaron 8 variables como se detalla más abajo en preguntas iniciales.
 
 # Preguntas Iniciales
 #¿Cuántas y qué tipo de variables se dispone para el análisis?
