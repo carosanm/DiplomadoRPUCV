@@ -60,8 +60,8 @@ encuesta incluyen:
 
 ## Descripción de las variables en estudio, factores a analizar y numero total de observaciones.
 
-Se realizara un analisis exploratorio a la base de datos de   150 centros
-de cultivo, con su correspondientes informacion 
+Se realiza un análisis exploratorio a la base de datos de 150 centros
+de cultivo, con su correspondiente información. Se analizaron 8 variables como se detalla más abajo en preguntas iniciales.
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set (echo = TRUE)
