@@ -242,20 +242,21 @@ En relación al tamaño de la muestra, se puede mencionar que corresponden al 10
 datos observados.
 
 #Normalidad
-En relación con la distribución de los datos de densidad, los cuales corresponden a variables
-cuantitivas continuas, estos no se ajustan a una distribución normal de acuerdo con el
-estadístico Prueba de Shapiro-wilks cuyo valor de p es mayor 0,0001.
-En relación con la mortalidad, estos datos corresponden a variables cuantitativa discreta y
-cuya distribución de tipo binomial a la derecha, no se ajusta a la mortalidad según Shapiro-
-wilks cuyo valor de p es de >0,0001%. 
-Si bien los datos cuya distribución no es normal, se
-estaría violando el supuesto, sin embargo, de acuerdo con la clase del Dr. Gallardo, se podría
-aceptados datos casi normales, particularmente si en n es mayor a 30. 
+- Se analizó en el analisis exploratorio mediante el qq-plot
+```{r}
+qqnorm(D$Density)
+qqline(D$Density)
+```
 
-La distribución a la derecha
-en el histograma puede estar explicado por el tiempo de cultivo de los centros en donde la
-densidad aumenta en la medida que aumenta el tiempo de cultivo o crecimiento de los peces,
-en este caso la media es de 12,34 kg/m3.
+- En relación con la distribución de los datos de densidad, los cuales corresponden a variables
+cuantitivas continuas, estos no se ajustan a una distribución normal de acuerdo con el estadístico Prueba de Shapiro-wilks cuyo valor de p es mayor 0,0001.
+En relación con la mortalidad, estos datos corresponden a variables cuantitativa discreta y cuya distribución de tipo binomial a la derecha, no se ajusta a la mortalidad según Shapiro-wilks cuyo valor de p es de >0,0001%. 
+
+Si bien los datos cuya distribución no es normal, se
+estaría violando el supuesto, sin embargo, de acuerdo con la clase del Dr. Gallardo, se podría aceptar datos casi normales, particularmente si en n es mayor a 30. 
+
+La distribución a la derecha en el histograma puede estar explicado por el tiempo de cultivo de los centros en donde la
+densidad aumenta en la medida que aumenta el tiempo de cultivo o crecimiento de los peces, en este caso la media es de 12,34 kg/m3.
 
 ## Conclusiones
 Se acepta la hipotesis alternativa, la correlacion es positiva moderada, y muy posiblemente no lineal.
