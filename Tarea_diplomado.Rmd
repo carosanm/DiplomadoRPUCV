@@ -233,7 +233,25 @@ plot(lm1)
 
 ```
 
+
+
 # 4.2.-Independencia
+```{r Ejercicio 3b, echo=TRUE}
+
+lm.aov <- lm(D$Density ~D$Case , data = D)
+aov(lm.aov)
+
+```
+
+
+```{r, echo=TRUE}
+plot(lm.aov$residuals, pch=20, col = "grey")
+
+dwtest(D$Density ~D$Case , data = D,
+       alternative = c("two.sided"), 
+       iterations = 15)
+```
+
 Los datos disponible son
 independientes y no presentan error ya que en el análisis exploratorio previo se observó que existe igual numero de observaciones de densidad como números de jaulas que reportan
 mortalidad, estos datos, por ser colectados de un zona de fiordos con 5 areas de manejo donde se cultiva salmón del atlantico. 
@@ -252,9 +270,13 @@ datos observados.
 qqnorm(D$Density)
 qqline(D$Density)
 ```
+Y mediante el Test de Shapiro
+```{r Normalidad Shapiro, echo=TRUE}
 
-- En relación con la distribución de los datos de densidad, los cuales corresponden a variables
-cuantitivas continuas, estos no se ajustan a una distribución normal de acuerdo con el estadístico Prueba de Shapiro-wilks cuyo valor de p es mayor 0,0001.
+shapiro.test(x=D$Density )
+```
+
+- En relación con la distribución de los datos de densidad, los cuales corresponden a variables cuantitivas continuas, estos no se ajustan a una distribución normal de acuerdo con el estadístico Prueba de Shapiro-wilks cuyo valor de p es mayor 0,0001.
 En relación con la mortalidad, estos datos corresponden a variables cuantitativa discreta y cuya distribución de tipo binomial a la derecha, no se ajusta a la mortalidad según Shapiro-wilks cuyo valor de p es de >0,0001%. 
 
 Si bien los datos cuya distribución no es normal, se
@@ -262,6 +284,7 @@ estaría violando el supuesto, sin embargo, de acuerdo con la clase del Dr. Gall
 
 La distribución a la derecha en el histograma puede estar explicado por el tiempo de cultivo de los centros en donde la
 densidad aumenta en la medida que aumenta el tiempo de cultivo o crecimiento de los peces, en este caso la media es de 12,34 kg/m3.
+
 
 ## 5.- Conclusiones
 - Se acepta la hipotesis alternativa (hay correlación entre Densidad y Caso), la correlacion es positiva moderada, y muy posiblemente no lineal.
