@@ -1,5 +1,5 @@
 ---
-title: "Tarea diplomado: Analisis de caso: Mortalidad en MarineFjordland en 2021 "
+title: "Tarea Diplomado: Análisis de caso: Mortalidad en MarineFjordland en 2021 "
 author: "Carolina San Martin"
 date: "`r Sys.Date()`"
 output:
@@ -29,7 +29,7 @@ library(knitr)
 
 ```
 
-## Titulo: "Analisis de caso, mortalidad en MarineFjordland en 2021"
+## Titulo: "Análisis de caso: Mortalidad en MarineFjordland en 2021"
 
 ## 1.- Descripción del caso a resolver
 
@@ -108,7 +108,7 @@ Si el numero de observaciones y las variables permite realizar un analisis estad
 
 
 # 2.2.- Resumen y Visualización
-2.2.1.- Densidad de Cultivo
+#2.2.1.- Densidad de Cultivo
 ```{r}
 resumen<-D%>%group_by(Case)%>%summarise(N=n(), mean(Density), Variance= var(Density))
 kable(resumen)
@@ -132,7 +132,7 @@ Si observamos la tabla de frecuencia, en relación con las zonas de producción 
 
 Dentro de todas las variables, para este trabajo se decidió mostrar el analisis de sólo 2 variables Temperatura y Densidad, para luego ver la correlación de la variable Densidad y Caso (1), decir relación entre densidad y la presencia de mortalidad diaria mayor al 5%.
 
-#2.3.- Histograma Temperatura promedio 
+# 2.3.- Histograma Temperatura promedio 
 ```{r}
 ggplot(D, aes(x=D$MeanWaterTemperature))+
   geom_histogram(color="black", fill="grey", bins = 10)+theme_classic()+theme(text = element_text(size=20,face="bold",colour="black"))+xlab("Temperatura promedio c°")
@@ -143,7 +143,7 @@ ggplot(D, aes(x=D$MeanWaterTemperature))+
 boxplot(D$MeanWaterTemperature~D$Case, xlab= "Caso (Positivo=1/Negativo=0)", ylab="T° promedio C°")
 ```
 
-#2.5.- QQplot para ver la normalidad de los datos de Temperatura del agua
+# 2.5.- QQplot para ver la normalidad de los datos de Temperatura del agua
 ```{r}
 qqnorm(D$MeanWaterTemperature)
 qqline(D$MeanWaterTemperature)
@@ -155,25 +155,26 @@ D$MeanWaterTemperature <- rgamma (150, 1)
 qqnorm (D$MeanWaterTemperature)
 qqline (D$MeanWaterTemperature)
 ```
-#2.6.- Prueba de Kolmogorov-Smirnov en la variable Temperatura
+
+# 2.6.- Prueba de Kolmogorov-Smirnov en la variable Temperatura
 ```{r}
 ks.test(D$MeanWaterTemperature, "pnorm")
 ks.test(D$Case, "pnorm")
 
 ```
 
-#2.7.- Histograma para Densidad (distribucion binomial con desplazamiento a la derecha)
+# 2.7.- Histograma para Densidad (distribucion binomial con desplazamiento a la derecha)
 ```{r}
 ggplot(D, aes(x=D$Density))+
   geom_histogram(color="black", fill="grey", bins = 10)+theme_classic()+theme(text = element_text(size=20,face="bold",colour="black"))+xlab("Densidad")
 ```
 
-#2.8.- Gráfico Bloxpot asociando Densidad con Caso
+# 2.8.- Gráfico Bloxpot asociando Densidad con Caso
 ```{r}
 boxplot(D$Density~D$Case, xlab= "Caso (Positivo=1/Negativo=0)", ylab="Densidad")
 ```
 
-#2.9.- QQplot para ver la normalidad de los datos Densidad de cultivo
+# 2.9.- QQplot para ver la normalidad de los datos Densidad de cultivo
 ```{r}
 qqnorm(D$Density)
 qqline(D$Density)
@@ -181,29 +182,28 @@ qqline(D$Density)
 
 # De acuerdo a lo que vemos en el qqplot, los datos de Densidad no tienen una distribución normal y tienen una asimetría hacia la derecha.
 
-#2.10.- Prueba de Kolmogorov-Smirnov en la variable Densidad
+# 2.10.- Prueba de Kolmogorov-Smirnov en la variable Densidad
 ```{r}
 ks.test(D$Density, "pnorm")
 ks.test(D$Case, "pnorm")
 
 ```
 
-
-
-
 #2.11.- Preguntas Adicionales: Hipotesis nula 
 ¿La mortalidad observada en los casos positivos está explicada por tipo de vacuna, zona de manejo, temperatura promedio del agua, densidad de cultivo, compañia productora,enfermedad de branquias, presencia de caligus, calidad de smolt?  
 
 
-#2.12.- Comentario Final al analisis exploratorio de datos
+# 2.12.- Comentario Final al analisis exploratorio de datos
 La base de datos está limpia, completa, existen variables cualitativas y cuantitativas.
 La variables cuantitativas no tienen una distribución normal por ende se requiere pruebas no parametricas para un adecuado análisis estadistico.
 
-##3.- Propuesta de Hipotesis
+## 3.- Propuesta de Hipotesis
+La propuesta de la hipotesis se hizo considerando sólo la relación entre Densidad y Caso
+
 Hipotesis 0: La densidad no esta asociada al caso(1)
 Hipotesis 1: La densidad está asociada al caso (1)
 
-Para evaluavar la correlación entre dos variables cuantitativas y no parametricas se utilizará la coeficiente rho de Spearman.
+Para evaluar la correlación entre dos variables cuantitativas y no parametricas se utilizará la coeficiente rho de Spearman.
 
 ```{r}
 cor.test(x=D$Density, y=D$Case, method='spearman')
@@ -223,8 +223,8 @@ Correlación positiva perfecta…………………………...   + 1
 La interpretación del coeficiente rho de Spearman concuerda en valores próximos a 1; indican una correlación fuerte y positiva. Valores próximos a –1 indican una correlación fuerte y negativa. Valores próximos a cero indican que no hay correlación lineal. Puede que exista otro tipo de correlación, pero no lineal. 
 Y el P value es menor a 0,5 por lo tanto se acepta la hipotesis alternativa es decir hay correlación entre caso (1) y densidad.
 
-##4.- Evaluación de supuestos
-#4.1.-Homocedasticidad
+## 4.- Evaluación de supuestos
+# 4.1.-Homocedasticidad
 
 ```{r, echo=TRUE}
 
@@ -232,7 +232,8 @@ lm1<-lm(D$Density~ D$Case)
 plot(lm1)
 
 ```
-#4.2.-Independencia
+
+# 4.2.-Independencia
 Los datos disponible son
 independientes y no presentan error ya que en el análisis exploratorio previo se observó que existe igual numero de observaciones de densidad como números de jaulas que reportan
 mortalidad, estos datos, por ser colectados de un zona de fiordos con 5 areas de manejo donde se cultiva salmón del atlantico. 
@@ -245,7 +246,7 @@ Supuestos de tamaño de muestra
 En relación al tamaño de la muestra, se puede mencionar que corresponden al 100% de los
 datos observados.
 
-#4.3.- Normalidad
+# 4.3.- Normalidad
 - Se analizó en el analisis exploratorio mediante el qq-plot
 ```{r}
 qqnorm(D$Density)
