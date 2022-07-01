@@ -6,53 +6,6 @@ output:
     pdf_document: default
     html_document: default
 ---
-
-## Titulo: "Analisis de caso, mortalidad en MarineFjordland en 2021"
-
-## Descripción del problema a resolver
-
-En 2021, en Marinefjordland, un zona de fiordos con 5 areas de manejo, llamadas A, B, C, D y E, donde se cultiva salmón del atlantico, se
-vieron afectados 87 de 150 centros de cultivo. 
-El problema fue una
-mortalidad significativa de inicio repentino, comenzando en un nivel
-bajo, pero aumentando rápidamente hasta el 5% de la población en riesgo
-por día en los sitios afectados. Los datos fueron recopilaron en 2021,
-sin resultados concluyentes, no fue posible determinar el patogeno que lo causó, ni aislarlo.
-Por lo tanto la definición de caso fue:
-mortalidad significativa de inicio súbito que comienza en un nivel bajo,
-pero aumenta rápidamente al 5% o más de la población en riesgo por día en los sitios afectados. El centro de cultivo se considera caso (1) cuando las mortalidades alcanzan el 5% por día y no caso (0) cuando las mortalidades no alcanzan el 5% diario.
-Se probaron varios enfoques terapéuticos, pero ninguno ayudo
-significativamente a evitar la progresión de la enfermedad (aumento de mortalidad). Se cosecharon algunos de los sitios afectados, en la medida que la talla se los
-permitió, 5 sitios sacrificaron el stock, y en el resto, continuaron su etapa de engorda. En aquellos sitios que continuaron su etapa de engorda las pérdidas de peces fueron: Mín. 15 %, Máx. 65 %, y Media 45 %. Los datos
-fueron recopilados por la autoridad sanitaria nacional competente a principios de junio de 2021, de 150 granjas. 87 de estos fueron identificados como casos en ese momento. Los datos disponibles de la encuesta incluyen:
-
--   SiteName (Nombre centro)
-
--   ManagementArea (Area de Manejo)
-
--   Case (Caso 1/0)
-
--   MeanWaterTemperature (Temperatura promedio)
-
--   Density (Densidad)
-
--   Company (Compañía)
-
--   Vaccine (Tipo de vacuna)
-
--   SeaLice (Presencia de Sealice)
-
--   GillDisease (Enfermedad branquial )
-
--   FailedSmolt (Calidad smolt)
-
-![Figura 1: Areas de Manejo A, B, C, D y E de la zona MarineFjordland](MarineFjord.jpg)
-
-## Descripción de las variables en estudio, factores a analizar y numero total de observaciones.
-
-Se realiza un análisis exploratorio a la base de datos de 150 centros
-de cultivo, con su correspondiente información. Se analizaron 8 variables como se detalla más abajo en preguntas iniciales.
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set (echo = TRUE)
 install.packages("readxl")
@@ -76,9 +29,58 @@ library(knitr)
 
 ```
 
+## Titulo: "Analisis de caso, mortalidad en MarineFjordland en 2021"
+
+## 1.- Descripción del caso a resolver
+
+En 2021, en Marinefjordland, un zona de fiordos con 5 areas de manejo, llamadas A, B, C, D y E, donde se cultiva salmón del atlantico, se
+vieron afectados 87 de 150 centros de cultivo. 
+El problema fue una
+mortalidad significativa de inicio repentino, comenzando en un nivel
+bajo, pero aumentando rápidamente hasta el 5% de la población en riesgo
+por día en los sitios afectados. Los datos fueron recopilaron en 2021,
+sin resultados concluyentes, no fue posible determinar el patogeno que lo causó, ni aislarlo.
+Por lo tanto la definición de caso fue:
+mortalidad significativa de inicio súbito que comienza en un nivel bajo,
+pero aumenta rápidamente al 5% o más de la población en riesgo por día en los sitios afectados. El centro de cultivo se considera caso (1) cuando las mortalidades alcanzan el 5% por día y no caso (0) cuando las mortalidades no alcanzan el 5% diario.
+Se probaron varios enfoques terapéuticos, pero ninguno ayudo
+significativamente a evitar la progresión de la enfermedad (aumento de mortalidad). Se cosecharon algunos de los sitios afectados, en la medida que la talla se los
+permitió, 5 sitios sacrificaron el stock, y en el resto, continuaron su etapa de engorda. En aquellos sitios que continuaron su etapa de engorda las pérdidas de peces fueron: Mín. 15 %, Máx. 65 %, y Media 45 %. Los datos
+fueron recopilados por la autoridad sanitaria nacional competente a principios de junio de 2021, de 150 granjas. 87 de estos fueron identificados como casos en ese momento. Los datos disponibles de la encuesta incluyen:
+
+-   SiteName (Nombre centro)
+
+-   ManagementArea (Area de Manejo) Figura 1
+
+-   Case (Caso 1/0)
+
+-   MeanWaterTemperature (Temperatura promedio)
+
+-   Density (Densidad)
+
+-   Company (Compañía)
+
+-   Vaccine (Tipo de vacuna)
+
+-   SeaLice (Presencia de Sealice)
+
+-   GillDisease (Enfermedad branquial )
+
+-   FailedSmolt (Calidad smolt)
+
+![Figura 1: Areas de Manejo A, B, C, D y E de la zona MarineFjordland](MarineFjord.jpg)
+
+## 2.- Análisis Exploratorio de Datos
+
+# 2.1.-Descripción de las variables en estudio, factores a analizar y numero total de observaciones.
+
+Se realiza un análisis exploratorio a la base de datos de 150 centros
+de cultivo, con su correspondiente información.
+
 ```{r, datos}
 D <- read_delim("MarineFjordland.txt")
 ```
+
 # Preguntas Iniciales
 ¿Cuántas y qué tipo de variables se dispone para el análisis?
 8 variables:
@@ -92,7 +94,9 @@ Enfermedad branquial (variable aleatoria discreta con distribucion bernoulli),
 Calidad de smolt (variable aleatoria discreta con distribucion bernoulli).
 
 ¿Cuales son los tratamientos?
-Caso 1 (positivo, es decir mortalidad mayor al 5% diario), Caso 0 (negativo, es decir no se registra mortalidad mayor al 5% diario), variable aleatoria discreta con distribucion bernoulli
+Caso 1 (positivo, es decir mortalidad mayor al 5% diario),
+
+Caso 0 (negativo, es decir no se registra mortalidad mayor al 5% diario), variable aleatoria discreta con distribucion bernoulli
 
 ¿La base de datos está completa?, ¿tiene errores?
 Si está completa y no tiene errores
@@ -103,77 +107,81 @@ Si está completa y no tiene errores
 Si el numero de observaciones y las variables permite realizar un analisis estadistico.
 
 
-# Resumen y Visualización
+# 2.2.- Resumen y Visualización
+2.2.1.- Densidad de Cultivo
 ```{r}
 resumen<-D%>%group_by(Case)%>%summarise(N=n(), mean(Density), Variance= var(Density))
 kable(resumen)
 ```
+En este caso, como se aprecia en la tabla de frecuencia los datos de densidad de cultivos se encuentran balanceados al disponer se número de datos similares para casos con y sin mortalidad, lo que permitirá hacer un adecuado análisis.
 
+# 2.2.2.- Centros de Cultivo por area de Manejo 
+A continuación se describe la cantidad de centros de cultivos que tenían producción por área de producción.
 
-# Centros de Cultivo por area de Manejo (Barrio)
 ```{r}
 table(D$ManagementArea)
 ```
+En relación con las zonas de producción y cuantos centros de cultivos están operando, se puede aprecia en la tabla de frecuencia, primero que todas las zonas cuentas con centros de producción y por ende datos para analizar y además se encuentran balanceados los números de centros por zona de producción. 
 
-
+# 2.2.3.- Mortalidad por area de manejo
 # Casos Totales 0=negativo 1= caso positivo
 ```{r}
 table(D$Case, D$ManagementArea)
 ```
+Si observamos la tabla de frecuencia, en relación con las zonas de producción y la existencia de datos sobre centros con y sin mortalidad, vemos que en todas las zonas hay centros que presentaron mortalidad y no, vemos información balaceada de datos en las zonas A, B, sin embargo, en las zonas C y D mayor numero de centros no tuvieron mortalidad (caso 0) y por lado la zona E tuvo mayor numero de centros con mortalidad (caso 1). Creo que, si bien las hay un desbalance de centros para cada condición, es posible analizar debido a la aleatoriedad de los casos de mortalidad, pudiendo incluso establecerse una hipótesis respecto a la zona de producción y su relación con la mortalidad (caso 1).
+
 Dentro de todas las variables, para este trabajo se decidió mostrar el analisis de sólo 2 variables Temperatura y Densidad, para luego ver la correlación de la variable Densidad y Caso (1), decir relación entre densidad y la presencia de mortalidad diaria mayor al 5%.
 
-# Histograma Temperatura promedio 
+#2.3.- Histograma Temperatura promedio 
 ```{r}
 ggplot(D, aes(x=D$MeanWaterTemperature))+
   geom_histogram(color="black", fill="grey", bins = 10)+theme_classic()+theme(text = element_text(size=20,face="bold",colour="black"))+xlab("Temperatura promedio c°")
 ```
 
-# Gráfico Bloxpot asociando T° promedio con Caso
+# 2.4.- Gráfico Bloxpot asociando T° promedio con Caso
 ```{r}
 boxplot(D$MeanWaterTemperature~D$Case, xlab= "Caso (Positivo=1/Negativo=0)", ylab="T° promedio C°")
 ```
 
-# QQplot para ver la normalidad de los datos
+#2.5.- QQplot para ver la normalidad de los datos de Temperatura del agua
 ```{r}
 qqnorm(D$MeanWaterTemperature)
 qqline(D$MeanWaterTemperature)
 ```
-
-En este caso, buscaremos la normalidad con otra prueba, ya que la gran mayoria de las observaciones se encuentran en el eje, por lo que la interpretación del valor de P, debería ayudarnos. Otra opción sería realizar un gráfico con una distribución gamma confirmando que los datos no tienen una distribución normal y una asimetría a la izquierda.
-
+En este caso, buscaremos la normalidad con otra prueba, ya que la gran mayoría de las observaciones se encuentran en el eje, por lo que la interpretación del valor de P, debería ayudarnos. Otra opción sería realizar un gráfico con una distribución gamma confirmando que los datos no tienen una distribución normal y una   asimetría a la izquierda.
 
 ```{r}
 D$MeanWaterTemperature <- rgamma (150, 1)
 qqnorm (D$MeanWaterTemperature)
 qqline (D$MeanWaterTemperature)
 ```
-# Prueba de Kolmogorov-Smirnov
+#2.6.- Prueba de Kolmogorov-Smirnov en la variable Temperatura
 ```{r}
 ks.test(D$MeanWaterTemperature, "pnorm")
 ks.test(D$Case, "pnorm")
 
 ```
 
-# Histograma Densidad (distribucion binomial con desplazamiento a la derecha)
+#2.7.- Histograma para Densidad (distribucion binomial con desplazamiento a la derecha)
 ```{r}
 ggplot(D, aes(x=D$Density))+
   geom_histogram(color="black", fill="grey", bins = 10)+theme_classic()+theme(text = element_text(size=20,face="bold",colour="black"))+xlab("Densidad")
 ```
 
-# Gráfico Bloxpot asociando Densidad con Caso
+#2.8.- Gráfico Bloxpot asociando Densidad con Caso
 ```{r}
 boxplot(D$Density~D$Case, xlab= "Caso (Positivo=1/Negativo=0)", ylab="Densidad")
 ```
 
-# QQplot para ver la normalidad de los datos
+#2.9.- QQplot para ver la normalidad de los datos Densidad de cultivo
 ```{r}
 qqnorm(D$Density)
 qqline(D$Density)
 ```
 
-# De acuerdo a lo que vemos en el qqplot, los datos de Densidad no tienen una distribución normal y tienen una asimetría hacia la izquierda.
+# De acuerdo a lo que vemos en el qqplot, los datos de Densidad no tienen una distribución normal y tienen una asimetría hacia la derecha.
 
-# Prueba de Kolmogorov-Smirnov
+#2.10.- Prueba de Kolmogorov-Smirnov en la variable Densidad
 ```{r}
 ks.test(D$Density, "pnorm")
 ks.test(D$Case, "pnorm")
@@ -183,19 +191,19 @@ ks.test(D$Case, "pnorm")
 
 
 
-# Preguntas Adicionales: Hipotesis nula 
+#2.11.- Preguntas Adicionales: Hipotesis nula 
 ¿La mortalidad observada en los casos positivos está explicada por tipo de vacuna, zona de manejo, temperatura promedio del agua, densidad de cultivo, compañia productora,enfermedad de branquias, presencia de caligus, calidad de smolt?  
 
 
-# Comentario Final al analisis exploratorio de datos
+#2.12.- Comentario Final al analisis exploratorio de datos
 La base de datos está limpia, completa, existen variables cualitativas y cuantitativas.
 La variables cuantitativas no tienen una distribución normal por ende se requiere pruebas no parametricas para un adecuado análisis estadistico.
 
-# Propuesta de Hipotesis
+##3.- Propuesta de Hipotesis
 Hipotesis 0: La densidad no esta asociada al caso(1)
 Hipotesis 1: La densidad está asociada al caso (1)
 
-Para evaluavar la correlación entre dos variables cuantitativas y no parametricos se utilizará la coeficiente rho de Spearman.
+Para evaluavar la correlación entre dos variables cuantitativas y no parametricas se utilizará la coeficiente rho de Spearman.
 
 ```{r}
 cor.test(x=D$Density, y=D$Case, method='spearman')
@@ -215,8 +223,8 @@ Correlación positiva perfecta…………………………...   + 1
 La interpretación del coeficiente rho de Spearman concuerda en valores próximos a 1; indican una correlación fuerte y positiva. Valores próximos a –1 indican una correlación fuerte y negativa. Valores próximos a cero indican que no hay correlación lineal. Puede que exista otro tipo de correlación, pero no lineal. 
 Y el P value es menor a 0,5 por lo tanto se acepta la hipotesis alternativa es decir hay correlación entre caso (1) y densidad.
 
-## Evaluación de supuestos
-#Homocedasticidad
+##4.- Evaluación de supuestos
+#4.1.-Homocedasticidad
 
 ```{r, echo=TRUE}
 
@@ -224,7 +232,7 @@ lm1<-lm(D$Density~ D$Case)
 plot(lm1)
 
 ```
-#Independencia
+#4.2.-Independencia
 Los datos disponible son
 independientes y no presentan error ya que en el análisis exploratorio previo se observó que existe igual numero de observaciones de densidad como números de jaulas que reportan
 mortalidad, estos datos, por ser colectados de un zona de fiordos con 5 areas de manejo donde se cultiva salmón del atlantico. 
@@ -237,7 +245,7 @@ Supuestos de tamaño de muestra
 En relación al tamaño de la muestra, se puede mencionar que corresponden al 100% de los
 datos observados.
 
-#Normalidad
+#4.3.- Normalidad
 - Se analizó en el analisis exploratorio mediante el qq-plot
 ```{r}
 qqnorm(D$Density)
@@ -254,6 +262,7 @@ estaría violando el supuesto, sin embargo, de acuerdo con la clase del Dr. Gall
 La distribución a la derecha en el histograma puede estar explicado por el tiempo de cultivo de los centros en donde la
 densidad aumenta en la medida que aumenta el tiempo de cultivo o crecimiento de los peces, en este caso la media es de 12,34 kg/m3.
 
-## Conclusiones
-Se acepta la hipotesis alternativa, la correlacion es positiva moderada, y muy posiblemente no lineal.
+## 5.- Conclusiones
+- Se acepta la hipotesis alternativa (hay correlación entre Densidad y Caso), la correlacion es positiva moderada, y muy posiblemente no lineal.
+- De acuerdo con AED, la información disponible permite realizar un adecuado análisis estadístico.
 
