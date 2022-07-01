@@ -1,5 +1,5 @@
 # DiplomadoRPUCV
-## Titulo: "Analisis de caso, mortalidad en MarineFjordland en 2021"
+## Titulo: "Análisis de caso, mortalidad en MarineFjordland en 2021"
 
 ## Descripción del problema a resolver
 
