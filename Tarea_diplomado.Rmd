@@ -232,7 +232,7 @@ Correlación positiva moderada Fuerte………………….    +0,5
 
 Correlación positiva perfecta…………………………...   + 1 
 
-La interpretación del coeficiente rho de Spearman concuerda en valores próximos a 1; indican una correlación fuerte y positiva. Valores próximos a –1 indican una correlación fuerte y negativa. Valores próximos a cero indican que no hay correlación lineal. Puede que exista otro tipo de correlación, pero no lineal. 
+La interpretación del coeficiente rho de Spearman concuerda en valores próximos a 1; indican una correlación fuerte y positiva. Valores próximos a –1 indican una correlación fuerte y negativa. Valores próximos a cero indican que no hay correlación lineal. En este caso hay correlacion positiva moderada, pero no lineal. 
 Y el P value es menor a 0,5 por lo tanto se acepta la hipotesis alternativa es decir hay correlación entre caso (1) y densidad.
 
 ## 4.- Evaluación de supuestos
